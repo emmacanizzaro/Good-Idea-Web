@@ -20,18 +20,21 @@ window.addEventListener("scroll", handleNavbarScroll, { passive: true });
 const sections = document.querySelectorAll("main section[id]");
 const sectionObserver = new IntersectionObserver(
   (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
+    const visibleEntries = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((entryA, entryB) => entryB.intersectionRatio - entryA.intersectionRatio);
 
-      const id = entry.target.getAttribute("id");
-      navLinks.forEach((link) => {
-        link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
-      });
+    const currentSection = visibleEntries[0];
+    if (!currentSection) return;
+
+    const id = currentSection.target.getAttribute("id");
+    navLinks.forEach((link) => {
+      link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
     });
   },
   {
-    threshold: 0.4,
-    rootMargin: "-20% 0px -40% 0px",
+    threshold: [0.2, 0.35, 0.5, 0.65],
+    rootMargin: "-12% 0px -45% 0px",
   },
 );
 
@@ -41,12 +44,26 @@ function closeMobileMenu() {
   mobileMenu.classList.remove("open");
   hamburger.classList.remove("open");
   hamburger.setAttribute("aria-expanded", "false");
+  hamburger.setAttribute("aria-label", "Abrir menú");
 }
 
 hamburger.addEventListener("click", () => {
   const isOpen = mobileMenu.classList.toggle("open");
   hamburger.classList.toggle("open", isOpen);
   hamburger.setAttribute("aria-expanded", String(isOpen));
+  hamburger.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+});
+
+document.addEventListener("click", (event) => {
+  if (window.innerWidth >= 768 || !mobileMenu.classList.contains("open")) return;
+  if (event.target.closest("#hamburger, #mobile-menu")) return;
+
+  closeMobileMenu();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  closeMobileMenu();
 });
 
 allMenuLinks.forEach((anchor) => {
@@ -60,13 +77,10 @@ allMenuLinks.forEach((anchor) => {
     event.preventDefault();
     const offset =
       parseInt(
-        getComputedStyle(document.documentElement)
-          .getPropertyValue("--nav-height-offset")
-          .trim(),
+        getComputedStyle(document.documentElement).getPropertyValue("--nav-height-offset").trim(),
         10,
       ) || 80;
-    const targetPosition =
-      target.getBoundingClientRect().top + window.pageYOffset - offset;
+    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
 
     window.scrollTo({ top: targetPosition, behavior: "smooth" });
     if (window.innerWidth < 768) closeMobileMenu();
@@ -193,16 +207,13 @@ form.addEventListener("submit", async (event) => {
     const result = await response.json().catch(() => ({}));
 
     if (!response.ok || String(result.success).toLowerCase() !== "true") {
-      const reason =
-        result.message || "No se pudo enviar el formulario en este momento.";
+      const reason = result.message || "No se pudo enviar el formulario en este momento.";
       throw new Error(reason);
     }
 
     setSubmitState("success");
     form.reset();
-    allFields.forEach((field) =>
-      field.closest(".field-group").classList.remove("has-value"),
-    );
+    allFields.forEach((field) => field.closest(".field-group").classList.remove("has-value"));
     setError("nombre", "");
     setError("email", "");
     setError("telefono", "");
@@ -215,8 +226,7 @@ form.addEventListener("submit", async (event) => {
     setSubmitState("idle");
     setError(
       "proyecto",
-      error?.message ||
-        "No se pudo enviar el mensaje. Probá de nuevo en unos segundos.",
+      error?.message || "No se pudo enviar el mensaje. Probá de nuevo en unos segundos.",
     );
   }
 });
