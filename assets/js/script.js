@@ -292,18 +292,26 @@ profileImages.forEach((image) => {
   const placeholder = image.nextElementSibling;
 
   const revealImage = () => {
+    image.classList.remove("is-hidden");
     image.classList.add("is-loaded");
-    placeholder?.classList.add("is-hidden");
+    placeholder?.classList.remove("is-visible");
   };
 
-  const hideBrokenImage = () => {
+  const showPlaceholder = () => {
     image.classList.add("is-hidden");
+    placeholder?.classList.add("is-visible");
   };
 
   image.addEventListener("load", revealImage);
-  image.addEventListener("error", hideBrokenImage);
+  image.addEventListener("error", showPlaceholder);
 
-  if (image.complete && image.naturalWidth > 0) revealImage();
+  if (image.complete) {
+    if (image.naturalWidth > 0) {
+      revealImage();
+    } else {
+      showPlaceholder();
+    }
+  }
 });
 
 const currentYearEl = document.getElementById("current-year");

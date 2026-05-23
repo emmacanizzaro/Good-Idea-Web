@@ -725,7 +725,7 @@ section {
   aspect-ratio: 3 / 4;
   object-fit: cover;
   border-radius: 24px 24px 0 0;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.35s ease;
 }
 
@@ -733,8 +733,7 @@ section {
   opacity: 1;
 }
 
-.profile-image.is-hidden,
-.profile-image-placeholder.is-hidden {
+.profile-image.is-hidden {
   display: none;
 }
 
@@ -743,7 +742,7 @@ section {
   width: 100%;
   border-radius: 24px 24px 0 0;
   background: linear-gradient(160deg, rgba(59, 130, 246, 0.34), rgba(255, 101, 132, 0.24));
-  display: grid;
+  display: none;
   place-items: center;
   color: rgba(255, 255, 255, 0.9);
   font-weight: 700;
@@ -751,6 +750,10 @@ section {
   text-align: center;
   padding: 24px;
   font-size: 1.1rem;
+}
+
+.profile-image-placeholder.is-visible {
+  display: grid;
 }
 
 .profile-footer {
