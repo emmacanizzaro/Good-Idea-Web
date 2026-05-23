@@ -9,62 +9,79 @@ const submitBtn = document.getElementById("submit-btn");
 const animatedElements = document.querySelectorAll('[data-animate="fade-up"]');
 const readMoreBlocks = document.querySelectorAll("[data-read-more]");
 const profileImages = document.querySelectorAll(".profile-image");
+const MOBILE_BREAKPOINT = 768;
+
+function isMobileViewport() {
+  return window.innerWidth <= MOBILE_BREAKPOINT;
+}
 
 function handleNavbarScroll() {
+  if (!navbar) return;
   navbar.classList.toggle("scrolled", window.scrollY > 80);
 }
 
-handleNavbarScroll();
-window.addEventListener("scroll", handleNavbarScroll, { passive: true });
+if (navbar) {
+  handleNavbarScroll();
+  window.addEventListener("scroll", handleNavbarScroll, { passive: true });
+}
 
 const sections = document.querySelectorAll("main section[id]");
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    const visibleEntries = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((entryA, entryB) => entryB.intersectionRatio - entryA.intersectionRatio);
+if (sections.length > 0 && navLinks.length > 0) {
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      const visibleEntries = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((entryA, entryB) => entryB.intersectionRatio - entryA.intersectionRatio);
 
-    const currentSection = visibleEntries[0];
-    if (!currentSection) return;
+      const currentSection = visibleEntries[0];
+      if (!currentSection) return;
 
-    const id = currentSection.target.getAttribute("id");
-    navLinks.forEach((link) => {
-      link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
-    });
-  },
-  {
-    threshold: [0.2, 0.35, 0.5, 0.65],
-    rootMargin: "-12% 0px -45% 0px",
-  },
-);
+      const id = currentSection.target.getAttribute("id");
+      navLinks.forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+      });
+    },
+    {
+      threshold: [0.2, 0.35, 0.5, 0.65],
+      rootMargin: "-12% 0px -45% 0px",
+    },
+  );
 
-sections.forEach((section) => sectionObserver.observe(section));
+  sections.forEach((section) => sectionObserver.observe(section));
+}
 
 function closeMobileMenu() {
+  if (!mobileMenu || !hamburger) return;
   mobileMenu.classList.remove("open");
   hamburger.classList.remove("open");
   hamburger.setAttribute("aria-expanded", "false");
   hamburger.setAttribute("aria-label", "Abrir menú");
 }
 
-hamburger.addEventListener("click", () => {
-  const isOpen = mobileMenu.classList.toggle("open");
-  hamburger.classList.toggle("open", isOpen);
-  hamburger.setAttribute("aria-expanded", String(isOpen));
-  hamburger.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
-});
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener("click", () => {
+    const isOpen = mobileMenu.classList.toggle("open");
+    hamburger.classList.toggle("open", isOpen);
+    hamburger.setAttribute("aria-expanded", String(isOpen));
+    hamburger.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+  });
 
-document.addEventListener("click", (event) => {
-  if (window.innerWidth >= 768 || !mobileMenu.classList.contains("open")) return;
-  if (event.target.closest("#hamburger, #mobile-menu")) return;
+  document.addEventListener("click", (event) => {
+    if (!isMobileViewport() || !mobileMenu.classList.contains("open")) return;
+    if (event.target.closest("#hamburger, #mobile-menu")) return;
 
-  closeMobileMenu();
-});
+    closeMobileMenu();
+  });
 
-document.addEventListener("keydown", (event) => {
-  if (event.key !== "Escape") return;
-  closeMobileMenu();
-});
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    closeMobileMenu();
+  });
+
+  window.addEventListener("resize", () => {
+    if (!isMobileViewport()) closeMobileMenu();
+  });
+}
 
 allMenuLinks.forEach((anchor) => {
   anchor.addEventListener("click", (event) => {
@@ -83,7 +100,7 @@ allMenuLinks.forEach((anchor) => {
     const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
 
     window.scrollTo({ top: targetPosition, behavior: "smooth" });
-    if (window.innerWidth < 768) closeMobileMenu();
+    if (isMobileViewport()) closeMobileMenu();
   });
 });
 
@@ -101,10 +118,12 @@ projectCards.forEach((card) => {
     toggleCard();
   });
 
-  closeButton.addEventListener("click", (event) => {
-    event.stopPropagation();
-    card.classList.remove("expanded");
-  });
+  if (closeButton) {
+    closeButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      card.classList.remove("expanded");
+    });
+  }
 });
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -141,95 +160,101 @@ function validateField(field) {
   return true;
 }
 
-const allFields = Array.from(form.querySelectorAll(".field-control"));
+if (form && submitBtn) {
+  const allFields = Array.from(form.querySelectorAll(".field-control"));
 
-allFields.forEach((field) => {
-  const parent = field.closest(".field-group");
+  allFields.forEach((field) => {
+    const parent = field.closest(".field-group");
+    if (!parent) return;
 
-  const refreshFloatingState = () => {
-    parent.classList.toggle(
-      "has-value",
-      field.value.trim().length > 0 || document.activeElement === field,
-    );
-  };
+    const refreshFloatingState = () => {
+      parent.classList.toggle(
+        "has-value",
+        field.value.trim().length > 0 || document.activeElement === field,
+      );
+    };
 
-  field.addEventListener("input", () => {
-    refreshFloatingState();
-    validateField(field);
-  });
-
-  field.addEventListener("focus", refreshFloatingState);
-  field.addEventListener("blur", () => {
-    refreshFloatingState();
-    validateField(field);
-  });
-
-  refreshFloatingState();
-});
-
-function setSubmitState(state) {
-  if (state === "idle") {
-    submitBtn.className = "submit-btn";
-    submitBtn.innerHTML = "Enviar mensaje →";
-    return;
-  }
-
-  if (state === "loading") {
-    submitBtn.className = "submit-btn loading";
-    submitBtn.innerHTML = '<span class="spinner"></span> Enviando...';
-    return;
-  }
-
-  if (state === "success") {
-    submitBtn.className = "submit-btn success";
-    submitBtn.innerHTML = "✓ ¡Mensaje enviado con éxito!";
-  }
-}
-
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const isValid = allFields.every((field) => validateField(field));
-  if (!isValid) return;
-
-  setSubmitState("loading");
-
-  try {
-    const formData = new FormData(form);
-    const response = await fetch(form.action, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-      body: formData,
+    field.addEventListener("input", () => {
+      refreshFloatingState();
+      validateField(field);
     });
 
-    const result = await response.json().catch(() => ({}));
+    field.addEventListener("focus", refreshFloatingState);
+    field.addEventListener("blur", () => {
+      refreshFloatingState();
+      validateField(field);
+    });
 
-    if (!response.ok || String(result.success).toLowerCase() !== "true") {
-      const reason = result.message || "No se pudo enviar el formulario en este momento.";
-      throw new Error(reason);
+    refreshFloatingState();
+  });
+
+  function setSubmitState(state) {
+    if (state === "idle") {
+      submitBtn.className = "submit-btn";
+      submitBtn.innerHTML = "Enviar mensaje →";
+      return;
     }
 
-    setSubmitState("success");
-    form.reset();
-    allFields.forEach((field) => field.closest(".field-group").classList.remove("has-value"));
-    setError("nombre", "");
-    setError("email", "");
-    setError("telefono", "");
-    setError("proyecto", "");
+    if (state === "loading") {
+      submitBtn.className = "submit-btn loading";
+      submitBtn.innerHTML = '<span class="spinner"></span> Enviando...';
+      return;
+    }
 
-    setTimeout(() => {
-      setSubmitState("idle");
-    }, 2600);
-  } catch (error) {
-    setSubmitState("idle");
-    setError(
-      "proyecto",
-      error?.message || "No se pudo enviar el mensaje. Probá de nuevo en unos segundos.",
-    );
+    if (state === "success") {
+      submitBtn.className = "submit-btn success";
+      submitBtn.innerHTML = "✓ ¡Mensaje enviado con éxito!";
+    }
   }
-});
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const isValid = allFields.every((field) => validateField(field));
+    if (!isValid) return;
+
+    setSubmitState("loading");
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || String(result.success).toLowerCase() !== "true") {
+        const reason = result.message || "No se pudo enviar el formulario en este momento.";
+        throw new Error(reason);
+      }
+
+      setSubmitState("success");
+      form.reset();
+      allFields.forEach((field) => {
+        const parent = field.closest(".field-group");
+        parent?.classList.remove("has-value");
+      });
+      setError("nombre", "");
+      setError("email", "");
+      setError("telefono", "");
+      setError("proyecto", "");
+
+      setTimeout(() => {
+        setSubmitState("idle");
+      }, 2600);
+    } catch (error) {
+      setSubmitState("idle");
+      setError(
+        "proyecto",
+        error?.message || "No se pudo enviar el mensaje. Probá de nuevo en unos segundos.",
+      );
+    }
+  });
+}
 
 const animationObserver = new IntersectionObserver(
   (entries, observer) => {
@@ -281,8 +306,7 @@ profileImages.forEach((image) => {
   if (image.complete && image.naturalWidth > 0) revealImage();
 });
 
-document.getElementById("current-year").textContent = new Date().getFullYear();
-
-window.addEventListener("resize", () => {
-  if (window.innerWidth >= 768) closeMobileMenu();
-});
+const currentYearEl = document.getElementById("current-year");
+if (currentYearEl) {
+  currentYearEl.textContent = new Date().getFullYear();
+}
