@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://emmacanizzaro.github.io/DevIAR-Web/sitemap.xml

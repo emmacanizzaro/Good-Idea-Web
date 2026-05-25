@@ -47,10 +47,17 @@ DevIAR-Web/
   index.html
   robots.txt
   sitemap.xml
+  vite.config.js
+  eslint.config.js
+  package.json
+  public/
+    robots.txt
+    sitemap.xml
   assets/
     css/
       styles.css
     js/
+      main.js
       script.js
     img/
 ```
@@ -67,18 +74,29 @@ This repository is a strong example of:
 
 ## Local Setup
 
-This is a static project, so you can open it directly or serve it locally.
+Install dependencies and run it with Vite.
 
 ### Option 1
 
-Open `index.html` in your browser.
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
 
 ### Option 2
 
-Serve it with a local static server:
+Run quality checks and production build:
 
 ```bash
-npx serve .
+npm run check
+npm run build
 ```
 
 ## SEO and Metadata
