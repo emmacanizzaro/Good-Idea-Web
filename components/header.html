@@ -1,0 +1,33 @@
+<!-- components/header.html -->
+<nav id="navbar" aria-label="Navegación principal">
+  <div class="nav-inner">
+    <!--#include file="../components/logo.html" -->
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a class="nav-link" href="#inicio">Inicio</a></li>
+        <li><a class="nav-link" href="#quien-soy">Quién soy</a></li>
+        <li><a class="nav-link" href="#proyectos">Proyectos</a></li>
+        <li><a class="nav-link" href="#contacto">Contacto</a></li>
+      </ul>
+      <span class="nav-cta-wrap">
+        <a href="#contacto" class="nav-cta">Solicitar propuesta</a>
+      </span>
+      <button
+        class="hamburger"
+        id="hamburger"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#inicio">Inicio</a>
+      <a href="#quien-soy">Quién soy</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#contacto" class="nav-cta mobile-nav-cta">Solicitar propuesta</a>
+    </div>
+  </div>
+</nav>
