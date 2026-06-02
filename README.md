@@ -1,16 +1,16 @@
-# DevIAR Web
+# Good Idea Web
 
-DevIAR Web is a personal service landing page focused on web development, AI automation, and high-performance digital solutions.
+Good Idea Web is a personal service landing page focused on web development, AI automation, and high-performance digital solutions.
 It is designed as a lead-generation website that presents services, background, selected projects, and direct contact paths.
 
 [![HTML](https://img.shields.io/badge/HTML-5-E34F26)](#tech-stack)
 [![CSS](https://img.shields.io/badge/CSS-3-1572B6)](#tech-stack)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E)](#tech-stack)
-[![Live Demo](https://img.shields.io/badge/Demo-Live-0A7EA4)](https://emmacanizzaro.github.io/DevIAR-Web/)
+[![Live Demo](https://img.shields.io/badge/Demo-Live-0A7EA4)](https://emmacanizzaro.github.io/Good-Idea-Web/)
 
 ## Live Demo
 
-- https://emmacanizzaro.github.io/DevIAR-Web/
+- https://emmacanizzaro.github.io/Good-Idea-Web/
 
 ## Overview
 
@@ -43,7 +43,7 @@ It is designed as a lead-generation website that presents services, background, 
 ## Project Structure
 
 ```text
-DevIAR-Web/
+Good-Idea-Web/
   index.html
   robots.txt
   sitemap.xml
@@ -58,7 +58,6 @@ DevIAR-Web/
       styles.css
     js/
       main.js
-      script.js
     img/
 ```
 

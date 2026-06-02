@@ -1,10 +1,9 @@
-
 import { defineConfig } from "vite";
 import htmlInclude from "vite-plugin-html-include";
 
 export default defineConfig(({ command }) => {
   return {
-    base: command === "build" ? "/DevIAR-Web/" : "/",
+    base: command === "build" ? "/Good-Idea-Web/" : "/",
     plugins: [htmlInclude()],
     server: {
       port: 5173,

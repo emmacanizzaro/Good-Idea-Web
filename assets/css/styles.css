@@ -1,3 +1,30 @@
+:root {
+  --color-bg: #0a0a0f;
+  --color-surface: #111118;
+  --color-card: #16161f;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-accent: #3b82f6;
+  --color-accent-2: #7dd3fc;
+  --color-accent-glow: rgba(59, 130, 246, 0.15);
+  --color-text-primary: #f0f0f5;
+  --color-text-secondary: #a1a1b5;
+  --color-text-muted: #6b6b80;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --nav-height-offset: 90px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 .logo-dea {
   color: var(--color-accent) !important;
 }
@@ -20,7 +47,7 @@ nav#navbar {
     z-index: 2;
   }
   .logo-i::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 50%;
     top: -0.48em;
@@ -30,12 +57,15 @@ nav#navbar {
     background: #ffe066;
     border-radius: 50%;
     border: 2.5px solid #ffd600;
-    box-shadow: 0 0 18px 8px #ffe066, 0 0 32px 16px #ffd600cc, 0 0 8px 2px #fffbe6;
+    box-shadow:
+      0 0 18px 8px #ffe066,
+      0 0 32px 16px #ffd600cc,
+      0 0 8px 2px #fffbe6;
     pointer-events: none;
     z-index: 3;
   }
   .logo-i::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 60%;
     top: 0.25em;
@@ -51,7 +81,7 @@ nav#navbar {
     z-index: 1;
   }
   .logo-idea::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0.19em;
     top: -0.48em;
@@ -60,12 +90,15 @@ nav#navbar {
     background: #ffe066;
     border-radius: 50%;
     border: 2.5px solid #ffd600;
-    box-shadow: 0 0 18px 8px #ffe066, 0 0 32px 16px #ffd600cc, 0 0 8px 2px #fffbe6;
+    box-shadow:
+      0 0 18px 8px #ffe066,
+      0 0 32px 16px #ffd600cc,
+      0 0 8px 2px #fffbe6;
     pointer-events: none;
     z-index: 2;
   }
   .logo-idea::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0.28em;
     top: -0.13em;
@@ -76,56 +109,56 @@ nav#navbar {
     z-index: 2;
     pointer-events: none;
   }
-  }
-  .logo {
-    font-family: 'Nunito', 'Segoe UI', Arial, sans-serif;
+}
+.logo {
+  font-family: "Nunito", "Segoe UI", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2.1rem;
+  letter-spacing: 0.01em;
+  .logo-idea {
+    color: var(--color-accent);
+    margin-left: 0.08em;
     font-weight: 900;
-    font-size: 2.1rem;
-    letter-spacing: 0.01em;
-    .logo-idea {
-      color: var(--color-accent);
-      margin-left: 0.08em;
-      font-weight: 900;
-      display: inline;
-      letter-spacing: 0;
-    }
-    .logo-i {
-      display: inline;
-      position: relative;
-      font-style: normal;
-      padding: 0;
-      margin: 0;
-    }
-    .logo-i .logo-bulb {
-      display: inline;
-      width: 0.38em;
-      height: 0.38em;
-      background: #fffbe6;
-      border-radius: 50%;
-      position: absolute;
-      left: 50%;
-      top: -0.48em;
-      transform: translateX(-50%);
-      border: 1.5px solid #fbbf24;
-      box-shadow: 0 0 6px 2px #ffe06699;
-      margin: 0;
-      padding: 0;
-      vertical-align: middle;
-      font-size: 1em;
-      line-height: 1;
-    }
-    .logo-i .logo-bulb::after {
-      content: '';
-      display: block;
-      width: 0.18em;
-      height: 0.08em;
-      background: #fbbf24;
-      border-radius: 0 0 0.1em 0.1em;
-      position: absolute;
-      left: 50%;
-      bottom: -0.13em;
-      transform: translateX(-50%);
-    }
+    display: inline;
+    letter-spacing: 0;
+  }
+  .logo-i {
+    display: inline;
+    position: relative;
+    font-style: normal;
+    padding: 0;
+    margin: 0;
+  }
+  .logo-i .logo-bulb {
+    display: inline;
+    width: 0.38em;
+    height: 0.38em;
+    background: #fffbe6;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: -0.48em;
+    transform: translateX(-50%);
+    border: 1.5px solid #fbbf24;
+    box-shadow: 0 0 6px 2px #ffe06699;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    font-size: 1em;
+    line-height: 1;
+  }
+  .logo-i .logo-bulb::after {
+    content: "";
+    display: block;
+    width: 0.18em;
+    height: 0.08em;
+    background: #fbbf24;
+    border-radius: 0 0 0.1em 0.1em;
+    position: absolute;
+    left: 50%;
+    bottom: -0.13em;
+    transform: translateX(-50%);
+  }
   color: var(--color-text-primary);
   line-height: 1.75;
   overflow-x: hidden;
@@ -270,7 +303,6 @@ body {
   border: 2px solid var(--color-surface);
 }
 
-
 a {
   color: var(--color-accent);
   text-decoration: none;
@@ -285,6 +317,7 @@ img {
   display: block;
 }
 
+section {
   padding: 100px 24px 80px 24px;
   position: relative;
   max-width: 1200px;
@@ -315,7 +348,7 @@ img {
   overflow: visible;
 }
 .logo .eye::after {
-  content: '';
+  content: "";
   display: block;
   width: 0.5em;
   height: 0.5em;
@@ -328,7 +361,7 @@ img {
 }
 /* Cejas sobre los ojos */
 .logo .eye::before {
-  content: '';
+  content: "";
   display: block;
   width: 1em;
   height: 0.25em;
@@ -360,7 +393,7 @@ img {
   box-shadow: 0 2px 8px 0 #0002;
 }
 .bulb::after {
-  content: '';
+  content: "";
   display: block;
   width: 0.3em;
   height: 0.2em;
@@ -383,7 +416,10 @@ img {
   background: transparent;
   color: var(--color-accent);
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, border 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border 0.2s;
   margin-right: 1em;
   margin-bottom: 0.5em;
 }
@@ -453,7 +489,6 @@ img {
 .bg-lights {
   opacity: 0.7;
   filter: blur(0.5px) brightness(0.9);
-}
 }
 
 .section-label {
@@ -776,38 +811,44 @@ img {
 }
 
 .hamburger {
+  display: none;
   width: 44px;
   height: 44px;
   border-radius: 12px;
   border: 1px solid var(--color-border);
   background: rgba(255, 255, 255, 0.02);
-  display: inline-block;
+  cursor: pointer;
   position: relative;
-  width: 1.1em;
-  height: 1.1em;
-  margin: 0 0.02em;
-  border-radius: 50%;
-  background: #fff;
-  color: #111;
-  font-weight: 900;
-  text-align: center;
-  border: 2px solid #111;
-  box-shadow: none;
-  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0;
+  flex-shrink: 0;
 }
 
-.logo .eye::after {
-  content: '';
+.hamburger span {
   display: block;
-  width: 0.45em;
-  height: 0.45em;
-  background: #111;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.35s ease;
+  width: 20px;
+  height: 2px;
+  background: var(--color-text-primary);
+  border-radius: 2px;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
 .mobile-menu {
   display: none;

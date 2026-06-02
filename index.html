@@ -14,7 +14,7 @@
       content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
     />
     <meta name="theme-color" content="#0a0a0f" />
-    <link rel="canonical" href="https://emmacanizzaro.github.io/DevIAR-Web/" />
+    <link rel="canonical" href="https://emmacanizzaro.github.io/Good-Idea-Web/" />
 
     <meta
       http-equiv="Content-Security-Policy"
@@ -31,8 +31,8 @@
       property="og:image"
       content="https://via.placeholder.com/1200x630.png?text=Emma+Canizzaro+Landing+Page"
     />
-    <meta property="og:url" content="https://emmacanizzaro.github.io/DevIAR-Web/" />
-    <meta property="og:site_name" content="DeV·IAR Web" />
+    <meta property="og:url" content="https://emmacanizzaro.github.io/Good-Idea-Web/" />
+    <meta property="og:site_name" content="Good Idea Web" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_AR" />
 
@@ -53,14 +53,14 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/styles.css?v=20260317" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
-        "name": "DeV·IAR Web",
-        "url": "https://emmacanizzaro.github.io/DevIAR-Web/",
+        "name": "Good Idea Web",
+        "url": "https://emmacanizzaro.github.io/Good-Idea-Web/",
         "image": "https://via.placeholder.com/1200x630.png?text=Emma+Canizzaro+Landing+Page",
         "description": "Desarrollo web, landing pages y automatización con IA para empresas y emprendedores.",
         "areaServed": "AR",
@@ -72,8 +72,6 @@
         ]
       }
     </script>
-
-    <!-- Navegacion -->
   </head>
   <body>
     <!-- Luces ambiente de fondo -->
@@ -86,8 +84,7 @@
       <div class="orb orb-6"></div>
     </div>
 
-    <!--#include file="components/header.html" -->
-
+    <include file="components/header.html"></include>
     <!-- Main Content -->
 
     <main>
@@ -563,7 +560,7 @@
               method="POST"
               novalidate
             >
-              <input type="hidden" name="_subject" value="Nuevo contacto desde DeV·IAR Web" />
+              <input type="hidden" name="_subject" value="Nuevo contacto desde Good Idea Web" />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
               <input type="hidden" name="_honey" />
@@ -640,61 +637,7 @@
 
     <!-- Footer -->
 
-    <!--#include file="components/footer.html" -->
-
-          <div class="footer-social">
-            <h4>Redes</h4>
-            <div class="social-list">
-              <a
-                class="social-btn"
-                href="https://www.linkedin.com/in/emmanuel-canizzaro-848283104/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M6.94 8.5H3.56V20h3.38zM5.25 3A1.97 1.97 0 1 0 5.3 7a1.97 1.97 0 0 0-.05-4zM20.44 12.28c0-3.03-1.62-4.44-3.78-4.44a3.28 3.28 0 0 0-2.95 1.62V8.5h-3.38V20h3.38v-6.42c0-1.69.32-3.33 2.41-3.33 2.06 0 2.09 1.93 2.09 3.44V20h3.39z"
-                  />
-                </svg>
-              </a>
-              <a
-                class="social-btn"
-                href="https://github.com/emmacanizzaro"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.6-1.3-1.4-1.7-1.4-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.3 1.8 1.3 1.1 1.9 2.9 1.4 3.6 1.1.1-.8.4-1.4.7-1.7-2.7-.3-5.5-1.4-5.5-6a4.7 4.7 0 0 1 1.3-3.3 4.3 4.3 0 0 1 .1-3.2s1-.3 3.4 1.3a11.5 11.5 0 0 1 6.2 0c2.4-1.6 3.4-1.3 3.4-1.3.5 1.2.2 2.4.1 3.2a4.7 4.7 0 0 1 1.3 3.3c0 4.6-2.8 5.7-5.5 6 .4.3.8 1 .8 2.1v3.1c0 .4.2.7.8.6A12 12 0 0 0 12 .5z"
-                  />
-                </svg>
-              </a>
-              <a
-                class="social-btn"
-                href="https://www.instagram.com/emmacanizzaro/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-                  <circle cx="12" cy="12" r="4"></circle>
-                  <circle cx="17.4" cy="6.6" r="1"></circle>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="copyright-bar">
-        © <span id="current-year"></span> DeV<span>·</span>I<span class="logo-ar">AR 🇦🇷</span>
-        · Diseñado y desarrollado en Argentina
-      </div>
-    </footer>
-
+    <include file="components/footer.html"></include>
     <script type="module" src="assets/js/main.js"></script>
   </body>
 </html>
